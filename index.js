@@ -1,4 +1,5 @@
 // express app
+const serverless = require("serverless-http");
 
 const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
@@ -125,6 +126,4 @@ app.post("/", async (req, res) => {
   return res.json(formFields);
 });
 
-app.listen(3000, () => {
-  console.log("doc-ai app listening on port 3000!");
-});
+module.exports.handler = serverless(app);
