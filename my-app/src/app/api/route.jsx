@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+google
 const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
 const projectId = "bridge-438615";
@@ -9,14 +9,7 @@ function removeTrailingNewline(str) {
   return str.replace(/\n+$/, "");
 }
 let i = 0;
-
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "10mb", // Set the limit to 10 MB
-    },
-  },
-};
+ 
 
 
 // Get route in next app router
