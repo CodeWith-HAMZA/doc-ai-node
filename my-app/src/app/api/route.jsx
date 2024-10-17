@@ -1,38 +1,41 @@
-// express app
-// const serverless = require("serverless-http");
+import { NextResponse } from "next/server";
 
 const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
-const cors = require("cors");
-
-const express = require("express");
-const fs = require("fs");
-const bodyParser = require("body-parser");
-const app = express();
 const projectId = "bridge-438615";
 const location = "us"; // Format is 'us' or 'eu'
-const processorId = "8752d0adb33a04f3"; // Create processor in Cloud Console
-const filePath = "";
-const key = "AIzaSyCVNB_JGhtfBqoHPMHCTyQRU-cffiZ5PnE";
-let i = 0;
-app.use(cors({ origin: "*" }));
-
-// app.use(express.json()); // For parsing application/json
-app.use(bodyParser.json({ limit: "10mb" }));
+const processorId = "8752d0adb33a04f3";
 function removeTrailingNewline(str) {
   return str.replace(/\n+$/, "");
 }
+let i = 0;
 
-// Example usage:
-const originalString = "Hello, World!\n\n";
-const cleanedString = removeTrailingNewline(originalString);
-console.log(cleanedString); // Output: "Hello, World!"
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb", // Set the limit to 10 MB
+    },
+  },
+};
 
-app.get("/hamza", (req, res) => {
-  return res.json({ message: "doc" });
-});
-app.post("/", async (req, res) => {
-  // Instantiates a client
+
+// Get route in next app router
+export async function GET(request) {
+  console.log(request, " hey");
+
+  return NextResponse.json({ message: "Hello, Next.js with App Router!" });
+}
+/**
+ * Handles POST requests to the route.
+ *
+ * @param {import("next/server").NextRequest} request
+ * @returns {import("next/server").NextResponse}
+ */
+
+export async function POST(request) {
+  // get rquest body
+  const body = await request.json();
+  const { base64Image } = body;
 
   const client = new DocumentProcessorServiceClient({
     // keyFilename: ,
@@ -55,7 +58,6 @@ app.post("/", async (req, res) => {
   });
 
   let formFields = {}; // Initialize an empty object
-  const base64Image = req.body.base64Image; // Get the base64 image from the request body
 
   async function processDocument() {
     // The full resource name of the processor, e.g.:
@@ -122,9 +124,6 @@ app.post("/", async (req, res) => {
   // return res.json({ message: "doc-ai app", resul });
 
   await processDocument();
-  return res.json(formFields);
-});
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
-// module.exports.handler = serverless(app);
+
+  return NextResponse.json(formFields);
+}
