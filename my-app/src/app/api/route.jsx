@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-google
+ 
 const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
 const projectId = "bridge-438615";
