@@ -133,5 +133,9 @@ export async function POST(request) {
 
   await processDocument();
 
-  return NextResponse.json(formFields);
+  return NextResponse.json(formFields, {
+    headers: {
+      "Access-Control-Allow-Origin": "*", // This allows access from any origin
+    },
+  });
 }
