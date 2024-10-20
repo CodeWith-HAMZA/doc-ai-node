@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+ 
 const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
 const projectId = "bridge-438615";
@@ -9,12 +9,14 @@ function removeTrailingNewline(str) {
   return str.replace(/\n+$/, "");
 }
 let i = 0;
+ 
+
 
 // Get route in next app router
 export async function GET(request) {
   console.log(request, " hey");
 
-  return NextResponse.json({ message: "ue, Next.js with App Router!" });
+  return NextResponse.json({ message: "Hola, Next.js with App Router!" });
 }
 /**
  * Handles POST requests to the route.
