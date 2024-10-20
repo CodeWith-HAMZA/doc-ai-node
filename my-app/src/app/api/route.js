@@ -25,7 +25,7 @@ export async function GET(request) {
   console.log(request, " hey");
 
   return NextResponse.json(
-    { message: "Hola, Nextu.js with App Router!" },
+    { message: "Holaaaaaa, Nextu.js with App Router!" },
     {
       headers: {
         "Access-Control-Allow-Origin": "*", // This allows access from any origin
