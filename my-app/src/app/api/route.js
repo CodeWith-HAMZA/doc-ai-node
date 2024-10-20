@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
- 
+
 const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
 const projectId = "bridge-438615";
@@ -9,8 +9,17 @@ function removeTrailingNewline(str) {
   return str.replace(/\n+$/, "");
 }
 let i = 0;
- 
 
+// Handle CORS preflight request (OPTIONS)
+export async function OPTIONS() {
+  return NextResponse.json(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*", // You can restrict this to your mobile app's URL if necessary
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
+}
 
 // Get route in next app router
 export async function GET(request) {
@@ -118,5 +127,9 @@ export async function POST(request) {
 
   await processDocument();
 
-  return NextResponse.json(formFields);
+  return NextResponse.json(formFields, {
+    headers: {
+      "Access-Control-Allow-Origin": "*", // Or restrict to specific origins
+    },
+  });
 }
