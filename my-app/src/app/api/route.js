@@ -16,7 +16,7 @@ let i = 0;
 export async function GET(request) {
   console.log(request, " hey");
 
-  return NextResponse.json({ message: "Hello, Next.js with App Router!" });
+  return NextResponse.json({ message: "Hola, Next.js with App Router!" });
 }
 /**
  * Handles POST requests to the route.
