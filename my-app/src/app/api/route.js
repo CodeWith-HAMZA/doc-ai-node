@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
- 
+
 const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
 const projectId = "bridge-438615";
@@ -9,14 +9,29 @@ function removeTrailingNewline(str) {
   return str.replace(/\n+$/, "");
 }
 let i = 0;
- 
 
+export async function OPTIONS() {
+  return NextResponse.json(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*", // For testing purposes, allows all domains
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
+}
 
 // Get route in next app router
 export async function GET(request) {
   console.log(request, " hey");
 
-  return NextResponse.json({ message: "Hola, Next.js with App Router!" });
+  return NextResponse.json(
+    { message: "HOHOOOOO, Nextu.js with App Router!" },
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*", // This allows access from any origin
+      },
+    }
+  );
 }
 /**
  * Handles POST requests to the route.
@@ -118,5 +133,9 @@ export async function POST(request) {
 
   await processDocument();
 
-  return NextResponse.json(formFields);
+  return NextResponse.json(formFields, {
+    headers: {
+      "Access-Control-Allow-Origin": "*", // This allows access from any origin
+    },
+  });
 }
