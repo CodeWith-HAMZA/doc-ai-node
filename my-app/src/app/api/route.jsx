@@ -4,7 +4,7 @@ const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
 const projectId = "bridge-438615";
 const location = "us"; // Format is 'us' or 'eu'
-const processorId = "8752d0adb33a04f3";
+const processorId = "60ed5dbe26ea0ba2";
 function removeTrailingNewline(str) {
   return str.replace(/\n+$/, "");
 }
@@ -16,7 +16,7 @@ let i = 0;
 export async function GET(request) {
   console.log(request, " hey");
 
-  return NextResponse.json({ message: "Hello, Next.js with App Router!" });
+  return NextResponse.json({ message: "Hola, Next.js with App Router!" });
 }
 /**
  * Handles POST requests to the route.
