@@ -4,7 +4,7 @@ const { DocumentProcessorServiceClient } =
   require("@google-cloud/documentai").v1;
 const projectId = "bridge-438615";
 const location = "us"; // Format is 'us' or 'eu'
-const processorId = "60ed5dbe26ea0ba2";
+const processorId = "8752d0adb33a04f3";
 function removeTrailingNewline(str) {
   return str.replace(/\n+$/, "");
 }
@@ -25,7 +25,7 @@ export async function GET(request) {
   console.log(request, " hey");
 
   return NextResponse.json(
-    { message: "HOHOOOOO, Nextu.js with App Router!" },
+    { message: "Hollaa, Nextu.js with App Router!" },
     {
       headers: {
         "Access-Control-Allow-Origin": "*", // This allows access from any origin
